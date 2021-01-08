@@ -11,19 +11,8 @@ pipeline {
             steps {
 		withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install --user -r requirements.txt' 
-		    step {
-			app = docker.build('rahulravichandran94/devops-task')
-			}
 		}
             }
-	}
-        stage('PushImage') {
-		steps {
-		docker.withRegistry('https://registry.hub.docker.com', 'git') {
-		    app.push("${env.BUILD_NUMBER}")
-		    app.push("latest")
-		}
-	    }
 	}
     }
 }
