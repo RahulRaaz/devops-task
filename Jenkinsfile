@@ -1,22 +1,13 @@
-pipeline {
-    environment {
+pipeline {  environment {
     registry = "rahulravichandran94/devops-task"
     registryCredential = 'docker-integ_devops'
-    dockerImage = ""
-  }
-    agent none
-    stages {
-        stage('Build') {
-            agent { dockerfile true 
-              }
-	    agent { 
-		docker { image 'docker:dind'  }
-		}
-            steps {
-	    	script {
-		    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-		}
-	    }
+  }  agent any  stages {
+    stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
         }
+      }
     }
+  }
 }
