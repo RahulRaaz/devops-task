@@ -13,21 +13,22 @@ pipeline {
 		}
             }
         }
-	stage('Deploy') {
-	    agent any
-	    environment {
-		VOLUME = '$(pwd)/'
-		IMAGE = 'python:3.6'
+	    stage('Deploy') {
+	        agent any
+	        environment {
+		    VOLUME = '$(pwd)/'
+		    IMAGE = 'python:3.6'
+	            }
+	        steps {
+		    dir(path: env.BUILD_ID){
+		    sh "docker run --rm -v ${VOLUME}/{IMAGE} 'python app.py'"
+	            }
+	        post {
+		    success {
+		        archiveArtifacts "${env.BUILD_ID}/app"
+		    }
+	        }
 	    }
-	    steps {
-		dir(path: env.BUILD_ID){
-		sh "docker run --rm -v ${VOLUME}/{IMAGE} 'python app.py'"
-	    }
-	    post {
-		success {
-		    archiveArtifacts "${env.BUILD_ID}/app"
-		}
-	    }
-	}
+        }
     }
 }
