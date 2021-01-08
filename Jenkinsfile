@@ -18,15 +18,10 @@ pipeline {
     node {    
         def app     
         stage('Build image') {         
-            app = docker.build("brandonjones085/test")    
-        }
-        stage('Test image') {
-            app.inside {            
-                sh 'echo "Tests passed"'        
-            }    
+            app = docker.build("rahulravichandran94/devops-task")    
         }
         stage('Push image') {
-            docker.withRegistry('https://registry.hub.docker.com', 'git') {
+            docker.withRegistry('https://registry.hub.docker.com', 'docker-integ_devops') {
                 app.push("${env.BUILD_NUMBER}")            
                 app.push("latest")        
             }    
