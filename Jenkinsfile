@@ -9,6 +9,9 @@ pipeline {
         stage('Build') {
             agent { dockerfile true 
               }
+	    agent { 
+		docker { image 'docker:dind'  }
+		}
             steps {
 	    	script {
 		    dockerImage = docker.build registry + ":$BUILD_NUMBER"
