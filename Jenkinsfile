@@ -20,7 +20,6 @@ pipeline {
 		    IMAGE = 'python:3.6'
 	            }
 	        steps {
-		    dir(path: env.BUILD_ID){
 		    sh 'python app.py'
 	            }
 	        post {
