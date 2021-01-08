@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
 	    steps {
-		def app = 1)
+		def app = 1
 	    }
         }
     }
