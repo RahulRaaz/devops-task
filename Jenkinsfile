@@ -21,7 +21,8 @@ pipeline {
 	            }
 	        steps {
 		    dir(path: env.BUILD_ID){
-		    sh "docker run --rm -v ${VOLUME} ${IMAGE} 'python app.py'"
+		    sh "docker build -t devops-task:${BUILD_NUMBER}"
+		    sh 'docker images'
 	            }
 	        post {
 		    success {
