@@ -20,7 +20,7 @@ pipeline {
 		    IMAGE = 'python:3.6'
 	            }
 	        steps {
-		    sh 'python app.py'
+		    sh 'python sources/app.py'
 	            }
 	        post {
 		    success {
