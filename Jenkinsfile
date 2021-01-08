@@ -1,7 +1,6 @@
 pipeline {
     agent none 
     stages {
-	def app
         stage('Build') { 
             agent {
                 docker {
