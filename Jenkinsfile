@@ -21,9 +21,7 @@ pipeline {
 	            }
 	        steps {
 		    dir(path: env.BUILD_ID){
-		    sh 'ls devops-task:${BUILD_NUMBER}'
-		    sh "docker build -t devops-task:${BUILD_NUMBER} ./"
-		    sh 'docker images'
+		    sh 'python app.py'
 	            }
 	        post {
 		    success {
