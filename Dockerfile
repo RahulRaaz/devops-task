@@ -6,6 +6,8 @@ COPY requirements.txt .
 
 RUN pip install -r requirements.txt
 
-COPY app.py templates/index.html ./
+COPY app.py .
+
+COPY templates/index.html ./templates/
 
 CMD ["python","app.py"]
