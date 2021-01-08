@@ -1,6 +1,8 @@
 pipeline {
-    registry = "rahulravichandran94/devops-task"
-    registryCredential = 'docker-integ_devops'
+    environment {
+        registry = "rahulravichandran94/devops-task"
+        registryCredential = 'docker-integ_devops'
+    }
     agent none 
     stages {
         stage('Build') { 
