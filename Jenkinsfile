@@ -21,7 +21,7 @@ pipeline {
 	            }
 	        steps {
 		    dir(path: env.BUILD_ID){
-		    sh "docker run --rm -v ${VOLUME}/{IMAGE} 'python app.py'"
+		    sh "docker run --rm -v ${VOLUME} {IMAGE} 'python app.py'"
 	            }
 	        post {
 		    success {
