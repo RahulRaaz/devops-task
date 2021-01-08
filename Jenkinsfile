@@ -2,6 +2,7 @@ pipeline {
     environment {
     registry = "rahulravichandran94/devops-task"
     registryCredential = 'docker-integ_devops'
+    dockerImage = ""
   }
     agent none
     stages {
@@ -10,7 +11,7 @@ pipeline {
               }
             steps {
 	    	script {
-		    docker.build registry + ":$BUILD_NUMBER"
+		    dockerImage = docker.build registry + ":$BUILD_NUMBER"
 		}
 	    }
         }
