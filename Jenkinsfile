@@ -1,6 +1,7 @@
 pipeline {
     agent none
     stages {
+	def app
         stage('Build') {
             agent {
                 docker {
@@ -11,6 +12,7 @@ pipeline {
                 withEnv(["HOME=${env.WORKSPACE}"]) {
                     sh 'pip install --user -r requirements.txt' 
                 }
+		app = docker.build("getintodevops/hellonode")
             }
         }
     }
