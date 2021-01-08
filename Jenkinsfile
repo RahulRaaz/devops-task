@@ -10,6 +10,7 @@ pipeline {
             steps {
 		withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install --user -r requirements.txt'
+		    stash(name: 'all-files', includes: 'sources/*.py*')
 		}
             }
         }
@@ -20,6 +21,7 @@ pipeline {
 		    IMAGE = 'python:3.6'
 	            }
 	        steps {
+		    unstash(name: 'all-files')
 		    sh 'python sources/app.py'
 	            }
 	        post {
