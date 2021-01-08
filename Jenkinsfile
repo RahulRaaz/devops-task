@@ -13,25 +13,5 @@ pipeline {
 		}
             }
         }
-	stage('Deploy') {
-	    agent {
-		docker {
-		    image 'python:3.6'
-		}
-            }
-	    environment {
-	    VOLUME = '$(pwd)/'
-	    IMAGE = 'python:3.6'
-	    }
-	    steps {
-	    sh 'ls'
-            sh 'python app.py'
-            }
-            post {
-   	        success {
-		    archiveArtifacts "${env.BUILD_ID}/app"
-		}
-	    }
-	}
     }
 }
