@@ -1,8 +1,8 @@
 pipeline {
     agent none
     stages {
-	def app
         stage('Build') {
+	    def app
             agent {
                 docker {
                     image 'python:3.6'
