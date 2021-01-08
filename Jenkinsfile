@@ -14,12 +14,12 @@ pipeline {
 		    app = docker.build('rahulravichandran94/devops-task')
 		}
             }
+	}
         stage('PushImage') {
 		steps {
 		docker.withRegistry('https://registry.hub.docker.com', 'git') {
 		    app.push("${env.BUILD_NUMBER}")
 		    app.push("latest")
-		}
 		}
 	    }
 	}
