@@ -10,27 +10,27 @@ pipeline {
             steps {
 		withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install --user -r requirements.txt'
-		    sh 'pwd;ls 18;'
-		    stash(name: 'all-files', includes: './*')
 		}
             }
         }
-	    stage('Deploy') {
-	        agent any
-	        environment {
-		    VOLUME = '$(pwd)/'
-		    IMAGE = 'python:3.6'
-	            }
-	        steps {
-		    unstash(name: 'all-files')
-		    sh 'python sources/app.py'
-	            }
-	        post {
-		    success {
-		        archiveArtifacts "${env.BUILD_ID}/app"
-		    }
-	        }
+	stage('Deploy') {
+	    agent {
+		docker {
+		    image 'python:3.6'
+		}
+            }
+	    environment {
+	    VOLUME = '$(pwd)/'
+	    IMAGE = 'python:3.6'
 	    }
-        }
+	    steps {
+            sh 'python sources/app.py'
+            }
+            post {
+   	        success {
+		    archiveArtifacts "${env.BUILD_ID}/app"
+		}
+	    }
+	}
     }
-
+}
