@@ -1,6 +1,7 @@
 pipeline {
     agent none 
     stages {
+	def app
         stage('Build') { 
             agent {
                 docker {
@@ -10,9 +11,15 @@ pipeline {
             steps {
 		withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install --user -r requirements.txt' 
-		    docker.build('rahulravichandran94/devops-task')
+		    app = docker.build('rahulravichandran94/devops-task')
 		}
             }
-        }
+        stage('PushImage') {
+		docker.withRegistry('https://registry.hub.docker.com', 'git') {
+		    app.push("${env.BUILD_NUMBER}")
+		    app.push("latest")
+		}
+	    }
+	}
     }
 }
