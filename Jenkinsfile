@@ -1,4 +1,6 @@
 pipeline {
+    registry = "rahulravichandran94/devops-task"
+    registryCredential = 'docker-integ_devops'
     agent none 
     stages {
         stage('Build') { 
@@ -11,17 +13,8 @@ pipeline {
 		withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install --user -r requirements.txt' 
 		}
+		docker.build registry + ":$BUILD_NUMBER"
             }
 	}
-        def app     
-        stage('Build image') {         
-            app = docker.build("rahulravichandran94/devops-task")    
-        }
-        stage('Push image') {
-            docker.withRegistry('https://registry.hub.docker.com', 'docker-integ_devops') {
-                app.push("${env.BUILD_NUMBER}")            
-                app.push("latest")        
-            }    
-        }
     }
 }
