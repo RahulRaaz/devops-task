@@ -10,7 +10,7 @@ pipeline {
             steps {
 		withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install --user -r requirements.txt'
-		    stash(name: 'all-files', includes: 'sources/*.py*')
+		    stash(name: 'all-files', includes: './*')
 		}
             }
         }
