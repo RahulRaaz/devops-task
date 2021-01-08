@@ -15,9 +15,11 @@ pipeline {
 		}
             }
         stage('PushImage') {
+		steps {
 		docker.withRegistry('https://registry.hub.docker.com', 'git') {
 		    app.push("${env.BUILD_NUMBER}")
 		    app.push("latest")
+		}
 		}
 	    }
 	}
