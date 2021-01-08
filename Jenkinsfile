@@ -13,8 +13,6 @@ pipeline {
 		}
             }
 	}
-    }
-    node {    
         def app     
         stage('Build image') {         
             app = docker.build("rahulravichandran94/devops-task")    
