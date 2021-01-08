@@ -8,7 +8,8 @@ pipeline {
                 }
             }
             steps {
-                sh 'pip install -r requirements.txt ; python app.py' 
+		sh 'pip install -r requirements.txt'
+                sh 'python app.py' 
             }
         }
     }
