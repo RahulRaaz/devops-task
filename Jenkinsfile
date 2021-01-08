@@ -10,6 +10,7 @@ pipeline {
             steps {
 		withEnv(["HOME=${env.WORKSPACE}"]) {
 		    sh 'pip install --user -r requirements.txt' 
+		    app = docker.build('rahulravichandran94/devops-task')
 		}
             }
         }
