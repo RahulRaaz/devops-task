@@ -13,15 +13,5 @@ pipeline {
         	}
             }
 	}
-	    stage('Pushing  image') {
-		steps { 
-		    script {
-		        withAWS(region:'us-east-2',credentials:'Jenkins_aws') {
-		            s3Delete(bucket: 'rahul-devops-test-s3', path:'**/*')
-              		    s3Upload(bucket: 'rahul-devops-test-s3', workingDir:'build', includePathPattern:'**/*');
-		    }
-  		}
-	    }
-	}
     }
 }
