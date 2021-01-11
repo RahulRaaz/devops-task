@@ -2,7 +2,7 @@ pipeline {
 	environment {
     	    registry = "rahulravichandran94/devops-task"
     	    registryCredential = 'docker-integ_devops'
-	    dockerImage = ""
+	    dockerImage = ''
   	} 
 	agent any  
 	    stages {
