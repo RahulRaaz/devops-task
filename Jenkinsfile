@@ -9,7 +9,7 @@ pipeline {
 	    stage('Deploying image') {
 		steps {
 		    script {
-			sh "docker run --rm -m -d -p 5000:5000 $dockerImage 
+			sh "docker run --rm -m -d -p 5000:5000 $dockerImage "
 		    }
 		}
             }
