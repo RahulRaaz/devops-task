@@ -14,7 +14,7 @@ pipeline {
                     steps{
 			script{
 			    stts=sh "docker ps | grep devops-task | awk '{print \$1}'"
-                            if (stts) {
+                            if (-z "$stts") {
                                 sh "docker stop $stts"
 				sh "echo 'Build Stopped'"
                      }
