@@ -7,7 +7,7 @@ pipeline {
 	    stages {
     	        stage('Build image') {
       		    steps {
-          		    sh "docker build -t devops-task:$BUILD_NUMBER"
+          		    sh "docker build -t devops-task:$BUILD_NUMBER ."
                 }
     	    }
                 stage('Run image in ec2') {
