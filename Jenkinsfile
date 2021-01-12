@@ -10,7 +10,6 @@ pipeline {
       		    steps {
         		script {
           		    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                            sh 'echo $dockerImage'
                 }
     	    }
 	}
@@ -22,6 +21,11 @@ pipeline {
 		    }
 		}
 	    }
+        }
+                stage('Push image to Docker hub') {
+                    steps {
+                        sh 'docker run --rm -d -p 5000:5000 $registry'
+            }
         }
     }
 }
