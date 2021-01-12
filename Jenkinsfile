@@ -13,7 +13,7 @@ pipeline {
                     steps{
 			script{
 			    stts=sh(
-				    script: "docker ps | grep devops-task | awk '{print \$1}'"
+				    script: "docker ps | grep devops-task | awk '{print \$1}'",
 				    returnStdout: true
 				)
 			    sh "echo $ssts"
