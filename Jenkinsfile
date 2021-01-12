@@ -22,7 +22,7 @@ pipeline {
 		}
 	    }
         }
-                stage('Push image to Docker hub') {
+                stage('Run image in ec2') {
                     steps {
                         sh 'docker run --rm -d -p 5000:5000 $registry'
             }
