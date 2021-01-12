@@ -1,7 +1,6 @@
 pipeline {  
 	environment {
-    	    registryCredential = 'docker-integ_devops'
-	    dockerImage = ""
+	    stts=""
   	} 
 	agent any  
 	    stages {
@@ -14,7 +13,7 @@ pipeline {
                     steps{
 			script{
 			    stts=sh "docker ps | grep devops-task | awk '{print \$1}'"
-			    sh "echo $ssts"
+			    sh "echo '$ssts'"
                             if ("$stts") {
                                 sh "docker stop $stts"
 				sh "echo 'Build Stopped'"
