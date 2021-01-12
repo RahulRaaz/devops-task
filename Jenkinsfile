@@ -1,7 +1,4 @@
 pipeline {  
-	environment {
-	    stts=""
-  	} 
 	agent any  
 	    stages {
     	        stage('Build image') {
@@ -12,7 +9,7 @@ pipeline {
                 stage('Stop existing docker image if already running'){
                     steps{
 			script{
-			    stts=sh(
+			    def stts=sh(
 				    script: "docker ps | grep devops-task | awk '{print \$1}'",
 				    returnStdout: true
 				)
