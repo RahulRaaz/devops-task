@@ -13,9 +13,9 @@ pipeline {
                 stage('Stop existing docker image if already running'){
                     steps{
 			script{
-                            if (sh 'nc -z localhost 5000') {
-                                sh 'docker stop devops-task'
-				sh 'echo "Build Stopped"'
+                            if (sh "nc -z localhost 5000") {
+                                sh "docker stop devops-task"
+				sh "echo 'Build Stopped'"
                      }
 			    else {
 				sh 'echo "No Build running, proceeding to deploy"'
