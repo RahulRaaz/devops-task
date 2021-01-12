@@ -1,18 +1,26 @@
-pipeline {
-	environment { dockerImage = "" }
-	agent any
+pipeline {  
+	environment {
+    	    registry = "rahulravichandran94/devops-task"
+    	    registryCredential = 'docker-integ_devops'
+	    dockerImage = ""
+  	} 
+	agent any  
 	    stages {
     	        stage('Building image') {
-      	 	    steps {
-           	        script {
-          	            dockerImage = docker.build registry + ":$BUILD_NUMBER"
-        	}
+      		    steps {
+        		script {
+          		    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+    	    }
+	}
+		stage('Pushing  image') {
+		    steps {
+		    	script {
+		            docker.withRegistry( '', registryCredential ) {
+		            	dockerImage.push()
+		    }
+		}
 	    }
-	}
-	    stage('Deploying image') {
-		steps {
-		    sh "sudo docker run --rm -m -d -p 5000:5000" + "$dockerImage"
-            }
-	}
+        }
     }
 }
