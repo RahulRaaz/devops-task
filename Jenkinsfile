@@ -9,11 +9,11 @@ pipeline {
                 stage('Stop existing docker image if already running'){
                     steps{
 			script{
-			    def stts=sh(
+			    def stts = sh(
 				    script: "docker ps | grep devops-task | awk '{print \$1}'",
 				    returnStdout: true
 				)
-			    sh "echo $ssts"
+			    sh "echo ${stts}"
                             if ("$stts") {
                                 sh "docker stop $stts"
 				sh "echo 'Build Stopped'"
