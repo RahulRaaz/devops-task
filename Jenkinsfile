@@ -13,7 +13,7 @@ pipeline {
                 }
     	    }
 	}
-		stage('Pushing  image') {
+		stage('Push image to Docker hub') {
 		    steps {
 		    	script {
 		            docker.withRegistry( '', registryCredential ) {
