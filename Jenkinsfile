@@ -16,7 +16,7 @@ pipeline {
 			    sh "echo ${stts}"
                             if ("$stts") {
                                 sh "docker stop $stts"
-				sh "echo 'Build Stopped'"
+				sh "echo 'Build was running, stopped now. Proceeding to deployment'"
                      }
 			    else {
 				sh 'echo "No Build running, proceeding to deploy"'
